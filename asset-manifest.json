@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/carto-react-test/static/css/main.facf87ca.css",
+    "main.js": "/carto-react-test/static/js/main.b66ac86c.js",
+    "index.html": "/carto-react-test/index.html",
+    "main.facf87ca.css.map": "/carto-react-test/static/css/main.facf87ca.css.map",
+    "main.b66ac86c.js.map": "/carto-react-test/static/js/main.b66ac86c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.facf87ca.css",
+    "static/js/main.b66ac86c.js"
+  ]
+}
