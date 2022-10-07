@@ -1,7 +1,6 @@
 import { CartoLayer, setDefaultCredentials, MAP_TYPES } from '@deck.gl/carto';
 
 
-
 export default function storesLayer(style) {
     setDefaultCredentials({
         accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfN3hoZnd5bWwiLCJqdGkiOiI5Y2ZmYjkxNyJ9.7NoiHmm13BuGz7TXtLnFDomRXBxfhekzxqWIsZkGdpc',

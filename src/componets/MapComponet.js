@@ -11,7 +11,6 @@ import { Dataset } from './App';
 import { useEffect, useState } from 'react';
 
 
-
 const INITIAL_VIEW_STATE = {
     longitude: -100.41669,
     latitude: 37.7853,
@@ -21,11 +20,9 @@ const INITIAL_VIEW_STATE = {
 };
 
 
-
 export default function MapComponet({ dataset, style }) {
 
     const [layer, setLayer] = useState()
-
 
     useEffect(
         () => {

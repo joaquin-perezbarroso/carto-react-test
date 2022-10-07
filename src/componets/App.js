@@ -1,4 +1,3 @@
-
 import '../App.css';
 import { useState } from 'react';
 
@@ -8,9 +7,6 @@ import { MdPeople } from "react-icons/md";
 
 import MapComponet from './MapComponet';
 import StyleComponets from './StyleComponets';
-
-
-
 
 
 export const Dataset = {
@@ -24,17 +20,12 @@ export const Dataset = {
 export default function App() {
 
   const [dataset, setDataset] = useState(Dataset.Airports)
-  const [dimPoint, setDimPoint] = useState(2)
-  const [color, setColor] = useState({ r: 200, g: 150, b: 35 })
-
   const [style, setStyle] = useState({
     dim: 2,
     color: { r: 200, g: 150, b: 35 }
   })
 
-
   return (
-
     <div className="App">
       <header>
         <nav>
