@@ -42,7 +42,7 @@ export default function ChooseColorComponent({attributes, property, style, setSt
                     const index = parseInt(result)
                     return palette[index]
                 }
-                current.idProperty = property
+                current.idProperty = `${property}-${value.label}`
                 return current
             })
         }
@@ -54,7 +54,7 @@ export default function ChooseColorComponent({attributes, property, style, setSt
                     const index = value.values.indexOf(d[value.label])
                     return palette[index]
                 }
-                current.idProperty = property
+                current.idProperty = `${property}-${value.label}`
                 return current
             })
         }
