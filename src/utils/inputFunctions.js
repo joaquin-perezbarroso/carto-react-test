@@ -1,7 +1,7 @@
 export default function dimensionValidator(dim) {
 
     if (dim === undefined || dim === '') {
-        return 2 // Default value.
+        return
     }
 
     const value = parseInt(dim)

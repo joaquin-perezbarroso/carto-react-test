@@ -1,18 +1,32 @@
-import { CartoLayer, setDefaultCredentials, MAP_TYPES } from '@deck.gl/carto';
+import { CartoLayer, setDefaultCredentials, FORMATS, fetchLayerData, MAP_TYPES } from '@deck.gl/carto';
 
 
 export default function peopleLayer(style) {
     setDefaultCredentials({
-        accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfN3hoZnd5bWwiLCJqdGkiOiI5Y2ZmYjkxNyJ9.7NoiHmm13BuGz7TXtLnFDomRXBxfhekzxqWIsZkGdpc',
+        accessToken: 'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfN3hoZnd5bWwiLCJqdGkiOiJiNjg3MWE5NiJ9.s9jW4AoZ3JX3XjOwJg5gtJSK8c4oTuyXrklnftZ7GcQ',
         apiBaseUrl: 'https://gcp-us-east1.api.carto.com', // Default value (optional)
     });
+
+
+    async function seeData()
+    {
+    const {data} = await fetchLayerData({
+        type: MAP_TYPES.TILESET,
+        source: `carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup`,
+        connection: 'bigquery',
+        format: FORMATS.TILESET
+      })
+
+      console.log(`SEE PEOPLE: ${JSON.stringify(data)}`)
+    }
+    seeData()
 
 
     const cartoLayer =
         new CartoLayer({
             id: `people-layer-${style.color.r}`,
             type: MAP_TYPES.TILESET,
-            connection: 'carto_dw',
+            connection: 'bigquery',
             data: "carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup",
             pointRadiusMinPixels: style.dim,
             getLineColor: [style.color.r, style.color.g, style.color.b],

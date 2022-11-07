@@ -8,42 +8,54 @@ import { MdPeople } from "react-icons/md";
 import MapComponet from './MapComponet';
 import StyleComponets from './StyleComponets';
 
+import { MAP_TYPES, FORMATS } from '@deck.gl/carto';
+import useFetchLayerData from './layers/utils/useFetchLayerData';
+
 
 export const Dataset = {
-  Airports: "airports",
-  Stores: "stores",
-  People: "people"
+  Airports: {source:"carto-demo-data.demo_tables.airports", format:"json", type: MAP_TYPES.TABLE},
+  Stores: {source:"carto-demo-data.demo_tables.retail_stores", format:"json",  type: MAP_TYPES.TABLE},
+  People: {source:"carto-demo-data.demo_tilesets.sociodemographics_usa_blockgroup", format:FORMATS.TILESET,  type: MAP_TYPES.TILESET}
 }
 
+export const INITIAL_STYLE = {
+  idProperty: 'no_one',
+  getFillColor: [250, 0, 13],
+  getLineColor: [0, 0, 0],
+  radiusMinPixels: 3,
+  lineWidthMinPixels: 1
+}
 
 
 export default function App() {
 
   const [dataset, setDataset] = useState(Dataset.Airports)
-  const [style, setStyle] = useState({
-    dim: 2,
-    color: { r: 200, g: 150, b: 35 }
-  })
+  const [style, setStyle] = useState(INITIAL_STYLE)
+  const data = useFetchLayerData(dataset)
+
 
   return (
     <div className="App">
       <header>
         <nav>
           <ul className="bookables items-list-nav">
-            <li key={Dataset.Airports} className={dataset === Dataset.Airports ? "selected" : null}>
-              <button className="btn" onClick={() => setDataset(Dataset.Airports)}>
+            <li key={Dataset.Airports.source} className={dataset === Dataset.Airports ? "selected" : null}>
+              <button className="btn" onClick={() => {setStyle(INITIAL_STYLE)
+                                                      setDataset(Dataset.Airports)}}>
                 <IoMdAirplane />
                 <span>Airports</span>
               </button>
             </li>
-            <li key={Dataset.Stores} className={dataset === Dataset.Stores ? "selected" : null}>
-              <button className="btn" onClick={() => setDataset(Dataset.Stores)}>
+            <li key={Dataset.Stores.source} className={dataset === Dataset.Stores ? "selected" : null}>
+              <button className="btn" onClick={() => {setDataset(Dataset.Stores)
+                                                      setStyle(INITIAL_STYLE)}}>
                 <FaStoreAlt />
                 <span>Stores</span>
               </button>
             </li>
-            <li key={Dataset.People} className={dataset === Dataset.People ? "selected" : null}>
-              <button className="btn" onClick={() => setDataset(Dataset.People)}>
+            <li key={Dataset.People.source} className={dataset === Dataset.People ? "selected" : null}>
+              <button className="btn" onClick={() => {setDataset(Dataset.People)
+                                                      setStyle(INITIAL_STYLE)}}>
                 <MdPeople />
                 <span>People</span>
               </button>
@@ -52,9 +64,9 @@ export default function App() {
         </nav>
       </header>
       <main className='mainView'>
-        <StyleComponets style={style} setStyle={setStyle} />
+        <StyleComponets data={data} style={style} setStyle={setStyle} />
         <div className='map-container'>
-          <MapComponet dataset={dataset} style={style} />
+        <MapComponet dataset={dataset} data={data} style={style} />
         </div>
       </main>
     </div>

@@ -1,32 +1,26 @@
 import dimensionValidator from "../utils/inputFunctions"
 import { useState } from "react"
-import { RgbaColorPicker } from "react-colorful";
+import ChooseColorComponent from "./style-componets/ColorComponent"
 
-export default function StyleComponets({ style, setStyle }) {
+import attributesInJson from './layers/utils/datas-analisys'
+
+export default function StyleComponets({ data, style, setStyle }) {
     const [status, setStatus] = useState('ok')
+
+    const attributes = attributesInJson(data)
 
     function changeDimension(event) {
         try {
             const d = dimensionValidator(event.target.value)
-            setStyle(style => {
-                return {
-                    ...style,
-                    dim: d
-                }
+            setStyle(prevStyle => {
+                const current = {...prevStyle}
+                current[event.target.name] = d
+                return current
             })
         }
         catch (err) {
             setStatus('error')
         }
-    }
-
-    function changeColor(color) {
-        setStyle(style => {
-            return {
-                ...style,
-                color: color
-            }
-        })
     }
 
     if (status === 'error') {
@@ -44,9 +38,22 @@ export default function StyleComponets({ style, setStyle }) {
             <h3>Cambia propiedades de la layer</h3>
 
             <p>Tamaño del punto: (valores 0-10)</p>
-            <input type='text' onChange={changeDimension} />
+            <input name='radiusMinPixels' type='text' value={style.radiusMinPixels} onChange={changeDimension} />
+            <p>Grosor de lineas: (valores 0-10)</p>
+            <input name='lineWidthMinPixels' type='text' value={style.lineWidthMinPixels} onChange={changeDimension} />
             <div className="color-picker">
-                <RgbaColorPicker color={style.color} onChange={changeColor} />
+                <p>Elije el color de relleno</p>
+                <ChooseColorComponent id='fill'
+                                      attributes={attributes}
+                                      property='getFillColor'
+                                      style={style}
+                                      setStyle={setStyle} />
+                <p>Elije el color de bordes</p>
+                <ChooseColorComponent id='line'
+                                      attributes={attributes}
+                                      property='getLineColor'
+                                      style={style}
+                                      setStyle={setStyle} />
             </div>
         </div>
 
