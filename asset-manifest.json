@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/carto-react-test/static/css/main.facf87ca.css",
-    "main.js": "/carto-react-test/static/js/main.bb34c160.js",
+    "main.js": "/carto-react-test/static/js/main.6a092ac4.js",
     "index.html": "/carto-react-test/index.html",
     "main.facf87ca.css.map": "/carto-react-test/static/css/main.facf87ca.css.map",
-    "main.bb34c160.js.map": "/carto-react-test/static/js/main.bb34c160.js.map"
+    "main.6a092ac4.js.map": "/carto-react-test/static/js/main.6a092ac4.js.map"
   },
   "entrypoints": [
     "static/css/main.facf87ca.css",
-    "static/js/main.bb34c160.js"
+    "static/js/main.6a092ac4.js"
   ]
 }
